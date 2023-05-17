@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Esempio di menu a tendina con informazioni sul servizio</title>
+	<style>
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			z-index: 1;
+		}
+		
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+		
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+		
+		.dropdown-content a:hover {
+			background-color: #f1f1f1;
+		}
+		
+		.dropdown:hover .dropbtn {
+			background-color: #3e8e41;
+		}
+		
+		.service-info {
+			display: none;
+			padding: 12px 16px;
+			border: 1px solid #ddd;
+			margin-top: 5px;
+		}
+		
+		.service-info p {
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="dropdown">
+		<button class="dropbtn">Seleziona un servizio</button>
+		<div class="dropdown-content">
+			<a href="#" data-price="10" data-available="true">Servizio 1</a>
+			<a href="#" data-price="20" data-available="false">Servizio 2</a>
+			<a href="#" data-price="30" data-available="true">Servizio 3</a>
+			<a href="#" data-price="40" data-available="false">Servizio 4</a>
+		</div>
+		<div class="service-info"></div>
+	</div>
+
+	<script>
+		const dropdown = document.querySelector('.dropdown');
+		const serviceInfo = dropdown.querySelector('.service-info');
+
+		dropdown.addEventListener('click', (e) => {
+			if (e.target.tagName === 'A') {
+				e.preventDefault();
+				const price = e.target.getAttribute('data-price');
+				const available = e.target.getAttribute('data-available') === 'true' ? 'Disponibile' : 'Non disponibile';
+				serviceInfo.innerHTML = `<p>Prezzo: ${price} euro</p><p>Disponibilità: ${available}</p>`;
+				serviceInfo.style.display = 'block';
+			}
+		});
+	</script>
+
+</body>
+</html>
